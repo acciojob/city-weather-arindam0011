@@ -39,6 +39,7 @@ const App = () => {
       height: "400px", width: "400px", backgroundColor: "lightgray", borderRadius: "10px", padding: "10px"
      }}>
       <input
+      className="search"
       style={{ marginBottom: "10px" , padding: "10px", borderRadius: "10px", width: "300px", border: "none", outline: "none"}}
         type="text"
         placeholder="Enter city name"
