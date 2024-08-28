@@ -11,9 +11,10 @@ const App = () => {
         try {
           const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=03848967c30bc88033d0f78a2df95495`);
           const data = await res.json();
-          console.log(data); // Log data to see its structure
+           // Log data to see its structure
           if (data.cod === 200) {
             setApiData(data);
+            setCity("");
           } else {
             setApiData(null);
           }
