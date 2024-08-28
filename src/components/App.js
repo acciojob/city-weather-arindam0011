@@ -48,7 +48,7 @@ const App = () => {
         onChange={(e) => setCity(e.target.value)}
       />
       {apiData && apiData.main ? (  // Check if apiData and apiData.main exist
-        <div id="data" >
+        <div id="data" className="weather" >
           <h1 id="city">{apiData.name}</h1>
           <h2 id="temp">{toFahrenheit(apiData.main.temp)}°F</h2>
           <p id="desc">{apiData.weather[0].description}</p>
