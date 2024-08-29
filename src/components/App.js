@@ -4,17 +4,19 @@ import './../styles/App.css';
 const App = () => {
   const [city, setCity] = useState("");
   const [apiData, setApiData] = useState(null);
-
+  const[apiCity, setApiCity] = useState("");
+ 
   useEffect(() => {
     const getData = async () => {
-      if (city) {
+      if (apiCity) {
         try {
-          const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=03848967c30bc88033d0f78a2df95495`);
+          const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${apiCity}&appid=03848967c30bc88033d0f78a2df95495`);
           const data = await res.json();
            // Log data to see its structure
           if (data.cod === 200) {
             setApiData(data);
-            setCity("");
+            setApiCity(city)
+            setCity(""); 
           } else {
             setApiData(null);
           }
@@ -25,7 +27,7 @@ const App = () => {
       }
     };
     getData();
-  }, [city]);
+  }, [apiCity]);
 
   const toFahrenheit = (temp) => {
     return parseInt((temp - 273.15) * 9 / 5 + 32);
@@ -46,8 +48,9 @@ const App = () => {
         placeholder="Enter city name"
         value={city}
         onChange={(e) => setCity(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && setApiCity(city)}
       />
-      {apiData && apiData.main ? (  // Check if apiData and apiData.main exist
+      {apiData && apiData.main ? (  
         <div id="data" className="weather" >
           <h1 id="city">{apiData.name}</h1>
           <h2 id="temp">{toFahrenheit(apiData.main.temp)}°F</h2>
@@ -58,7 +61,7 @@ const App = () => {
           />
         </div>
       ) : (
-        city && <p>No data available for the city!</p>
+        apiCity && <p>No data available for the city!</p>
       )}
     </div>
     </div>
